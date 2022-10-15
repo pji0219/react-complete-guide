@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 function ExpenseForm() {
+  /* 여러 state 다루기 1방법
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
+  const [enteredDate, setEnteredDate] = useState(''); */
 
-  const titleChangeHandler = (event) => {
+  /* const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
 
@@ -16,6 +17,34 @@ function ExpenseForm() {
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
+  }; */
+
+  // 여러 state 다루기 2방법
+  const [userInput, setUserInput] = useState({
+    enteredTitle: '',
+    enteredAmount: '',
+    enteredDate: '',
+  });
+
+  const titleChangeHandler = (event) => {
+    setUserInput({
+      ...userInput,
+      enteredTitle: event.target.value,
+    });
+  };
+
+  const amountChangeHandler = (event) => {
+    setUserInput({
+      ...userInput,
+      enteredAmount: event.target.value,
+    });
+  };
+
+  const dateChangeHandler = (event) => {
+    setUserInput({
+      ...userInput,
+      enteredDate: event.target.value,
+    });
   };
 
   return (
