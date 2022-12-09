@@ -72,14 +72,23 @@ function ExpenseForm() {
     };
 
     console.log(expenseData);
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
   };
 
+  // 양방향 바인딩: 상태를 업데이트 하기 위해서 입력값을 수신하는 것 뿐만 아니라 입력에 상태를 다시 보내줌
+  // 그래서 상태를 변경하면 입력도 변함
   return (
     <form onSubmit={submitHandler}>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>
           <label>Title</label>
-          <input type='text' onChange={titleChangeHandler} />
+          <input
+            type='text'
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className='new-expense__control'>
           <label>Amount</label>
@@ -87,6 +96,7 @@ function ExpenseForm() {
             type='number'
             min='0.01'
             step='0.01'
+            value={enteredAmount}
             onChange={amountChangeHandler}
           />
         </div>
@@ -96,6 +106,7 @@ function ExpenseForm() {
             type='date'
             min='2019-01-01'
             max='2022-12-31'
+            value={enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
