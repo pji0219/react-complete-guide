@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 function ExpenseForm() {
-  /* 여러 state 다루기 1방법
+  // 여러 state 다루기 1방법
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
-  const [enteredDate, setEnteredDate] = useState(''); */
+  const [enteredDate, setEnteredDate] = useState('');
 
-  /* const titleChangeHandler = (event) => {
+  const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
 
@@ -17,10 +17,10 @@ function ExpenseForm() {
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
-  }; */
+  };
 
   // 여러 state 다루기 2방법
-  const [userInput, setUserInput] = useState({
+  /* const [userInput, setUserInput] = useState({
     enteredTitle: '',
     enteredAmount: '',
     enteredDate: '',
@@ -31,6 +31,11 @@ function ExpenseForm() {
       ...userInput,
       enteredTitle: event.target.value,
     });
+
+    3방법 이전 state에 의존해야 하는 경우 가장 안전한 방법, 이전 state에 기반하는 상황에서는 이 방법을 사용하는 것을 권장 예) 카운터
+    setUserInput((prevState) => {
+      return { ...prevState, enteredTitle: event.target.value }
+    })
   };
 
   const amountChangeHandler = (event) => {
@@ -38,6 +43,11 @@ function ExpenseForm() {
       ...userInput,
       enteredAmount: event.target.value,
     });
+
+    3방법 이전 state에 의존해야 하는 경우 가장 안전한 방법
+    setUserInput((prevState) => {
+      return { ...prevState, enteredAmount: event.target.value }
+    })
   };
 
   const dateChangeHandler = (event) => {
@@ -45,10 +55,27 @@ function ExpenseForm() {
       ...userInput,
       enteredDate: event.target.value,
     });
+
+    3방법 이전 state에 의존해야 하는 경우 가장 안전한 방법
+    setUserInput((prevState) => {
+      return { ...prevState, enteredDate: event.target.value }
+    })
+  }; */
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>
           <label>Title</label>
